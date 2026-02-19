@@ -1,0 +1,171 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import gallery1 from "../assets/images/stock-01.avif";
+import gallery2 from "../assets/images/stock-02.avif";
+import gallery3 from "../assets/images/stock-03.avif";
+import gallery4 from "../assets/images/stock-04.avif";
+import gallery5 from "../assets/images/stock-05.avif";
+import gallery6 from "../assets/images/stock-06.avif";
+
+import {
+    ArrowRight,
+    Droplets,
+    Wrench,
+    Search,
+    Zap,
+    CheckIcon,
+} from "@lucide/astro";
+
+const services = [
+    {
+        icon: Droplets,
+        title: "Diseño de Riego Automático",
+        description:
+            "Creamos planos de riego personalizados para cada tipo de terreno y vegetación. Utilizamos software especializado para maximizar la covertura y minimizar el consumo de agua.",
+        image: gallery1,
+        features: [
+            "Análisis de terreno y vegetación",
+            "Planos técnicos detallados",
+            "Selección de equipos óptimos",
+            "Cálculo de presión y caudal",
+        ],
+    },
+    {
+        icon: Wrench,
+        title: "Instalación y Mantención",
+        description:
+            "Ejecutamos la instalación completa de tu sistema de riego con materiales de primera calidad. Ofrecemos planes de mantención preventivos para asegurar el óptimo funcionamiento.",
+        image: gallery2,
+        features: [
+            "Instalación profesional",
+            "Mantención preventiva programada",
+            "Ajustes de temporada",
+            "Winterización de sistemas",
+        ],
+    },
+    {
+        icon: Search,
+        title: "Detección y Reparación de Fugas",
+        description:
+            "Utilizamos tecnología de detección acústica y termográfica para localizar fugas subterráneas sin necesidad de excavaciones innecesarias.",
+        image: gallery3,
+        features: [
+            "Detección no invasiva",
+            "Reparación inmediata",
+            "Informe técnico detallado",
+            "Garantía de reparación",
+        ],
+    },
+    {
+        icon: Zap,
+        title: "Bombas y Equipo de Impulsión",
+        description:
+            "Suministramos, instalamos y reparamos bombas de agua y equipos de impulsión para garantizar la presión adecuada en tu sistema de riego.",
+        image: gallery4,
+        features: [
+            "Asesoría en selección de bombas",
+            "Instalación certificada",
+            "Mantenimiento de equipos",
+            "Repuestos originales",
+        ],
+    },
+];
+---
+
+<Layout
+    title="Nuestros Servicios | Diseña Riego"
+    description="Diseño, instalación, mantención, detección de fugas y equipos de impulsión. Soluciones completas de riego automático con equipos Hunter, Rain Bird y Orbit para proyectos residenciales, comerciales e institucionales en Chile.">
+    <section class="relative py-24 overflow-hidden">
+        <div class="absolute inset-0" transition:name="hero">
+            <img
+                src="/images/hero.avif"
+                alt="Diseña Riego Hero"
+                class="size-full object-cover"
+            />
+            <div class="absolute inset-0 bg-linear-(--hero-overlay)"></div>
+        </div>
+        <div class="relative container mx-auto px-4 text-center">
+            <span
+                class="text-primary-fg/70 font-medium text-sm uppercase tracking-wider">
+                Lo que hacemos
+            </span>
+            <h1
+                class="text-4xl md:text-5xl font-display font-bold text-primary-fg mt-3">
+                Nuestros Servicios
+            </h1>
+            <p class="text-primary-fg/70 mt-4 max-w-xl mx-auto">
+                Soluciones completas de riego automático para todo tipo de
+                proyectos.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24">
+        <div class="container mx-auto px-4 space-y-24">
+            {
+                services.map((service, index) => (
+                    <article
+                        key={service.title}
+                        class={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? "lg:flex-row-reverse" : ""}`}>
+                        <div class={index % 2 === 1 ? "lg:order-2" : ""}>
+                            <Image
+                                src={service.image}
+                                alt={service.title}
+                                class="rounded-xl w-full h-80 object-cover shadow-xs"
+                            />
+                        </div>
+                        <div class={index % 2 === 1 ? "lg:order-1" : ""}>
+                            <div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                                <service.icon class="size-6 text-primary" />
+                            </div>
+                            <h2 class="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">
+                                {service.title}
+                            </h2>
+                            <p class="text-muted-fg leading-relaxed mb-6">
+                                {service.description}
+                            </p>
+                            <div class="space-y-2 mb-6">
+                                {service.features.map((feature) => (
+                                    <div
+                                        key={feature}
+                                        class="flex items-center gap-3">
+                                        <CheckIcon class="size-4 text-primary shrink-0" />
+                                        <span class="text-muted-fg text-sm">
+                                            {feature}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                            <a
+                                href="/contact"
+                                class="inline-flex items-center gap-2 text-primary font-semibold hover:underline">
+                                Solicitar este servicio
+                                <ArrowRight class="size-4" />
+                            </a>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </section>
+
+    <section class="bg-primary py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-display text-primary-fg mb-4">
+                ¿Necesitas un servicio personalizado?
+            </h2>
+            <p class="text-primary-fg/70 mb-8 max-w-lg mx-auto">
+                Cuentanos tu proyecto y te entregaremos una solución a medida.
+            </p>
+
+            <a
+                href="/contacto"
+                class="inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-fg rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                Contáctanos
+                <ArrowRight class="size-4" />
+            </a>
+        </div>
+    </section>
+</Layout>

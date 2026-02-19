@@ -1,11 +1,348 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import {
+    ArrowRight,
+    Droplets,
+    Wrench,
+    Search,
+    Zap,
+    CheckIcon,
+} from "@lucide/astro";
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import stock01 from "../assets/images/stock-01.avif";
+import stock05 from "../assets/images/stock-05.avif";
+
+const stats = [
+    { value: "30+", label: "Años de experiencia" },
+    { value: "2400", label: "Clientes satisfechos" },
+    { value: "1450", label: "Proyectos completados" },
+];
+
+const services = [
+    {
+        icon: Droplets,
+        title: "Diseño de Riego Automático",
+        description: "Planificación personalizada para cada espacio verde.",
+    },
+    {
+        icon: Wrench,
+        title: "Instalación y Mantención",
+        description: "Montaje profesional y mantenimiento preventivo.",
+    },
+    {
+        icon: Search,
+        title: "Detección y Reparación de Fugas",
+        description: "Tecnología avanzada para localizar y reparar fugas.",
+    },
+    {
+        icon: Zap,
+        title: "Bombas y Equipo de Impulsión",
+        description: "Suministro e instalación de bombas de alta eficiencia.",
+    },
+];
+
+import { Image } from "astro:assets";
+
+const allImages = import.meta.glob("../assets/images/*.avif");
+
+const images = Object.entries(allImages)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .slice(0, 20)
+    .map(([_, loader]) => loader());
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+    title="Diseña Riego | Sistemas de Riego Automático en Chile"
+    description="Diseñamos, instalamos y mantenemos sistemas de riego automático eficientes para jardines, parques y áreas verdes. Más de 30 años de experiencia y 1.450 proyectos completados en Chile.">
+    <section class="relative max-h-screen min-h-screen flex items-center">
+        <div class="fixed inset-0 -z-10" transition:name="hero">
+            <img
+                src="/images/hero.avif"
+                alt="Diseña Riego Hero"
+                class="size-full object-cover"
+            />
+            <div class="absolute inset-0 bg-linear-(--hero-overlay)"></div>
+        </div>
+        <div class="relative container mx-auto px-4 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="max-w-2xl">
+                    <span
+                        class="inline-block px-4 py-1.5 rounded-full bg-card/20 text-primary-fg text-sm font-medium mb-6 backdrop-blur-sm border border-card/30">
+                        Soluciones profesionales de riego
+                    </span>
+
+                    <h1
+                        class="text-4xl md:text-6xl font-display font-bold text-primary-fg leading-tight mb-6">
+                        Tu jardín merece el mejor
+                        <span class="italic">riego automático</span>
+                    </h1>
+                    <p
+                        class="text-lg text-primary-fg/80 mb-8 leading-relaxed max-w-lg">
+                        Diseñamos, instalamos y mantenemos sistemas de riego
+                        automático eficientes que cuidan tus áreas verdes y
+                        ahorran agua.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a
+                            href="/contact"
+                            class="inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-fg rounded-lg font-semibold hover:opacity-90 transition:opacity backdrop-blur-sm">
+                            Solicita una cotización
+                        </a>
+                        <a
+                            href="/services"
+                            class="inline-flex items-center gap-2 px-8 py-4 border border-primary-fg/30 text-primary-fg rounded-lg font-semibold hover:bg-primary-fg/10 transition:colors backdrop-blur-sm">
+                            Ver servicios
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden lg:grid grid-cols gap-4 max-w-sm ml-auto">
+                    {
+                        stats.map((stat, index) => (
+                            <div
+                                key={stat.label}
+                                class={`flex flex-col justify-center rounded-xl border border-primary-fg/20 backdrop-blur-sm bg-primary-fg/10 p-6 text-center ${index === 0 ? "col-start-1" : index === 1 ? "col-start-2" : "col-start-2"}`}>
+                                <div class="text-3xl font-display font-bold text-primary-fg mb-1">
+                                    {stat.value}
+                                </div>
+                                <div class="text-primary-fg/70 text-sm">
+                                    {stat.label}
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <div class="lg:hidden grid grid-cols-3 gap-4 mt-12">
+                {
+                    stats.map((stat) => (
+                        <div
+                            key={stat.label}
+                            class="flex flex-col justify-center rounded-xl border border-primary-fg/20 backdrop-blur-sm bg-primary-fg/10 p-6 text-center">
+                            <div class="text-2xl font-display font-bold text-primary-fg mb-1">
+                                {stat.value}
+                            </div>
+                            <div class="text-primary-fg/70 text-xs">
+                                {stat.label}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+        <div
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+            <span
+                class="text-primary-fg/60 text-xs font-medium tracking-wider uppercase">
+                Saber más
+            </span>
+            <ArrowRight class="size-5 text-primary-fg/60 rotate-90" />
+        </div>
+    </section>
+
+    <section class="relative z-10 bg-linear-(--section-gradient) py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span
+                    class="text-accent font-medium text-sm uppercase tracking-wider">
+                    Nuestros Servicios
+                </span>
+                <h2
+                    class="text-3xl md:text-4xl font-display font-bold text-foreground mt-3">
+                    Soluciones integrales de riego
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {
+                    services.map((service) => (
+                        <div
+                            key={service.title}
+                            class="group bg-card rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-lg">
+                            <div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                                <service.icon class="size-6 text-primary" />
+                            </div>
+                            <h3 class="font-display text-lg font-semibold text-foreground mb-2">
+                                {service.title}
+                            </h3>
+                            <p class="text-muted-fg text-sm leading-relaxed">
+                                {service.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+            <div class="text-center mt-12">
+                <a
+                    href="/services"
+                    class="inline-flex items-center gap-2 text-green-800 font-semibold hover:underline">
+                    Ver todos los servicios <ArrowRight class="size-4" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-10 bg-card/85 backdrop-blur-md py-24">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span
+                        class="text-accent font-medium text-sm uppercase tracking-wider"
+                        >Sobre Nosotros</span
+                    >
+                    <h2
+                        class="text-3xl md:text-4xl font-display font-bold text-foreground mt-3 mb-6">
+                        Más de 30 años cuidando tus espacios verdes
+                    </h2>
+                    <p class="text-muted-foreground leading-relaxed mb-6">
+                        Somos un equipo de profesionales especializados en el
+                        diseño, instalación y mantención de sistemas de riego
+                        automático. Trabajamos con las mejores marcas del
+                        mercado para garantizar calidad y durabilidad.
+                    </p>
+                    <div class="space-y-3 mb-8">
+                        {
+                            [
+                                "Profesionales certificados",
+                                "Materiales de primera calidad",
+                                "Garantía en todos nuestros trabajos",
+                            ].map((item) => (
+                                <div key={item} class="flex items-center gap-3">
+                                    <CheckIcon class="size-5 text-primary shrink-0" />
+                                    <span class="text-foreground text-sm font-medium">
+                                        {item}
+                                    </span>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <a
+                        href="/about"
+                        class="inline-flex items-center gap-2 text-primary font-semibold hover:underline">
+                        Conocer Más
+                        <ArrowRight class="size-4" />
+                    </a>
+                </div>
+                <div
+                    class="grid
+                            grid-cols-2
+                            gap-4">
+                    <Image
+                        class="rounded-xl w-full h-64 object-cover"
+                        src={stock01}
+                        alt="Stock Image"
+                    />
+                    <Image
+                        class="rounded-xl w-full h-64 object-cover mt-8"
+                        src={stock05}
+                        alt="Stock Image"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-10 bg-linear-(--section-gradient) py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <span
+                    class="text-accent font-medium text-sm uppercase tracking-wider">
+                    Nuestros Proyectos
+                </span>
+                <h2
+                    class="text-3xl md:text-4xl font-display font-bold text-foreground mt-3">
+                    Galería de trabajos realizados
+                </h2>
+            </div>
+            <div class="w-full max-w-5xl mx-auto">
+                <div class="overflow-hidden">
+                    <div id="track" class="flex -ml-4 items-center">
+                        {
+                            [...images, ...images].map((image, index) => (
+                                <div class="min-w-0 shrink-0 grow-0 basis-full pl-4 md:basis-1/2 lg:basis-1/3">
+                                    <div class="p-2">
+                                        <Image
+                                            src={image}
+                                            alt="Imagen de galería"
+                                            loading={
+                                                index < images.length
+                                                    ? "eager"
+                                                    : "lazy"
+                                            }
+                                            class="aspect-3/4 object-cover overflow-hidden rounded-xl w-full shadow-lg size-full"
+                                        />
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a
+                    href="/gallery"
+                    class="inline-flex items-center gap-2 text-primary font-semibold hover:underline">
+                    Ver galería completa
+                    <ArrowRight class="size-4" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-10 bg-primary py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-display text-primary-fg mb-4">
+                ¿Listo para automatizar tu riego?
+            </h2>
+            <p class="text-primary-fg/70 mb-8 max-w-lg mx-auto">
+                Contáctanos hoy y recibe una cotización personalizada sin
+                compromiso.
+            </p>
+
+            <a
+                href="/contact"
+                class="inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-fg rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                Contáctanos Ahora
+                <ArrowRight class="size-4" />
+            </a>
+        </div>
+    </section>
+
+    <script>
+        const track = document.getElementById("track");
+        const slide = track.children;
+
+        let index = 0;
+        const originalLength = slide.length / 2;
+        const intervalTime = 3000;
+        const transitionTime = 500;
+
+        function getSlidesPerView() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 768) return 2;
+            return 1;
+        }
+
+        function move() {
+            const slidesPerView = getSlidesPerView();
+            const step = 100 / slidesPerView;
+
+            index++;
+
+            track.style.transition = `transform ${transitionTime}ms ease-in-out`;
+            track.style.transform = `translateX(-${index * step}%)`;
+
+            if (index === originalLength) {
+                track.addEventListener(
+                    "transitionend",
+                    () => {
+                        index = 0;
+                        track.style.transition = `none`;
+                        track.style.transform = `translateX(0%)`;
+                    },
+                    { once: true },
+                );
+            }
+        }
+
+        setInterval(move, intervalTime);
+    </script>
 </Layout>

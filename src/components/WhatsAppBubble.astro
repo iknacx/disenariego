@@ -1,0 +1,18 @@
+---
+import { MessageCircle } from "@lucide/astro";
+import { phone } from "../assets/data.json";
+
+const whatsappNumber = phone.replace(/[+\s]/g, "");
+const whatsappMessage =
+    "Hola, me gustaría solicitar una cotización de riego automático";
+
+const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<a
+    href={whatsappLink}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="fixed bottom-6 right-6 z-50 flex items-center justify-center size-14 rounded-full bg-green-500 text-white shadow-lg hover:bg-green-600 hover:scale:110 transition-all duration-300">
+    <MessageCircle class="size-7" />
+</a>

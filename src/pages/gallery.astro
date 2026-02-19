@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+
+const images = Object.values(
+    import.meta.glob("../assets/images/*.avif", { eager: true }),
+).map((image) => image.default ?? image);
+---
+
+<Layout
+    title="Galería de Proyectos | Diseña Riego"
+    description="Conoce nuestra galería de proyectos de riego automático instalados en Chile. Más de 1.450 proyectos residenciales, comerciales e institucionales ejecutados con equipos Hunter, Rain Bird y Orbit.">
+    <section class="relative py-24 overflow-hidden">
+        <div class="absolute inset-0">
+            <img
+                src="/images/hero.avif"
+                alt="Diseña Riego Hero"
+                class="size-full object-cover"
+            />
+            <div class="absolute inset-0 bg-linear-(--hero-overlay)"></div>
+        </div>
+        <div class="relative container mx-auto px-4 text-center">
+            <span
+                class="text-primary-fg/70 font-medium text-sm uppercase tracking-wider">
+                Nuestro Trabajo
+            </span>
+            <h1
+                class="text-4xl md:text-5xl font-display font-bold text-primary-fg mt-3">
+                Galería
+            </h1>
+            <p class="text-primary-fg/70 mt-4 max-w-xl mx-auto">
+                Una muestra de nuestros proyectos e instalaciones.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-24">
+        <div class="container mx-auto px-4">
+            <div class="columns-2 md:columns-3 lg:columns-4 gap-4">
+                {
+                    images.map((image) => (
+                        <button
+                            class={`group relative overflow-hidden rounded-xl cursor-pointer shadow-sm mb-4 break-inside-avoid`}>
+                            <Image
+                                src={image}
+                                alt="Imagen de galería"
+                                class="w-full h-auto transition-transform duration-500 hover:scale-110"
+                            />
+                        </button>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+</Layout>
