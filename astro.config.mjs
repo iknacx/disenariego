@@ -11,4 +11,5 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
   },
+  site: "https://riego.iknacx.dev",
 });
