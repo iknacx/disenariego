@@ -58,6 +58,13 @@ const ogImage = new URL(image, Astro.site ?? "https://riego.iknacx.dev");
         <meta name="twitter:image" content={ogImage} />
 
         <ClientRouter />
+        <link
+            rel="preload"
+            as="image"
+            href="/images/hero.avif"
+            fetchpriority="high"
+        />
+        <slot name="head" />
     </head>
     <body>
         <Header transition:name="nav" transition:persist />

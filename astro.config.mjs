@@ -9,7 +9,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   prefetch: {
-    prefetchAll: true,
+    defaultStrategy: "hover",
   },
   site: "https://riego.iknacx.dev",
 });

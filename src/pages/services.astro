@@ -1,13 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
+import Image from "../components/Image.astro";
 
 import gallery1 from "../assets/images/stock-01.avif";
 import gallery2 from "../assets/images/stock-02.avif";
 import gallery3 from "../assets/images/stock-03.avif";
 import gallery4 from "../assets/images/stock-04.avif";
-import gallery5 from "../assets/images/stock-05.avif";
-import gallery6 from "../assets/images/stock-06.avif";
+
+import Hero from "../components/Hero.astro";
 
 import {
     ArrowRight,
@@ -78,14 +78,7 @@ const services = [
     title="Nuestros Servicios | Diseña Riego"
     description="Diseño, instalación, mantención, detección de fugas y equipos de impulsión. Soluciones completas de riego automático con equipos Hunter, Rain Bird y Orbit para proyectos residenciales, comerciales e institucionales en Chile.">
     <section class="relative py-24 overflow-hidden">
-        <div class="absolute inset-0" transition:name="hero">
-            <img
-                src="/images/hero.avif"
-                alt="Diseña Riego Hero"
-                class="size-full object-cover"
-            />
-            <div class="absolute inset-0 bg-linear-(--hero-overlay)"></div>
-        </div>
+        <Hero layout="absolute" />
         <div class="relative container mx-auto px-4 text-center">
             <span
                 class="text-primary-fg/70 font-medium text-sm uppercase tracking-wider">

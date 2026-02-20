@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
 import { Phone, Mail, MapPin, Send } from "@lucide/astro";
+
+import Hero from "../components/Hero.astro";
 
 import { phone, email, address } from "../assets/data.json";
 
@@ -28,14 +29,7 @@ const entries = [
     title="Contacto | Diseña Riego"
     description="Contáctanos para solicitar una cotización sin compromiso. Estamos listos para ayudarte con tu proyecto de riego automático residencial, comercial o institucional en Chile.">
     <section class="relative py-24 overflow-hidden">
-        <div class="absolute inset-0" transition:name="hero">
-            <img
-                src="/images/hero.avif"
-                alt="Diseña Riego Hero"
-                class="size-full object-cover"
-            />
-            <div class="absolute inset-0 bg-linear-(--hero-overlay)"></div>
-        </div>
+        <Hero layout="absolute" />
         <div class="relative container mx-auto px-4 text-center">
             <span
                 class="text-primary-fg/70 font-medium text-sm uppercase tracking-wider">
